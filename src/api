@@ -1,0 +1,41 @@
+
+
+
+
+
+async function fetchWeather(location){
+    const _apikey = "BA4NVUWU372HKTXPZ62A9WVGD";
+    try{
+        let response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/?key=${_apikey}`)
+        if(response.ok){
+            let data =  await response.json();
+            return(data)
+        }else{
+            console.log(`Error form the api-end: ${response.status}` )
+        }
+    }catch(error){
+        console.log(`Network error in fetching data:, ${error}` )
+    }
+  
+ 
+}
+
+export async function getWeatherData(location){
+    let rawData = await fetchWeather(location);
+    let address =  rawData.address;
+    let currentConditions =  rawData.currentConditions;
+    let days =  rawData.days;
+    let description =   rawData.description;
+    return  new  CleanData(address, currentConditions, days, description)
+}
+
+
+
+class CleanData{
+    constructor(address, currentConditions, days, description ){
+        this.location = address;
+        this.currentConditions = currentConditions;
+        this.days = days;
+        this.description = description;
+    }
+}

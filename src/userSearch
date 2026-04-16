@@ -1,0 +1,5 @@
+
+
+(function instatsiateUserSearchBar(){
+    const searchBoc = document.querySelector
+})();
