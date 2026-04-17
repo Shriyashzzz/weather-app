@@ -1,5 +1,59 @@
+import { getWeatherData } from "./api";
+import { populateSearchGif, populateWeatherData } from "./populateWeather";
+import { myWeather } from "./database";
+const toggleTempView = document.getElementById("toggleTempView")
+
+export function instatnsiatePage(){
+    const searchBox = document.getElementById('weather-search');
+    const searchBtn = document.getElementById('weather-search-btn');
+    instatnsiateToggleBtn();
+    searchBtn.addEventListener('click', async (event)=>{
+        event.preventDefault()
+        if(searchBox.value != ""){
+            myWeather.length= 0;
+            let weatherCleanData = await getWeatherData(searchBox.value)
+            myWeather.push(weatherCleanData)
+            searchBox.value = "";
+            let todayWeatherGif =  weatherCleanData.condition;
+            populateWeatherData(myWeather[0],toggleTempView.checked )
+            populateSearchGif(todayWeatherGif);
+            console.log(weatherCleanData)
+            
+            
+        }else{
+            return
+        }
+        
+    })
+    
+}
+
+function instatnsiateToggleBtn(){
+    toggleTempView.addEventListener('click', ()=>{
+        if(myWeather.length!=0){
+            populateWeatherData(myWeather[0], toggleTempView.checked)
+            console.log(toggleTempView.checked)
+        }
 
 
-(function instatsiateUserSearchBar(){
-    const searchBoc = document.querySelector
-})();
+        
+    })
+
+}
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

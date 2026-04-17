@@ -7,21 +7,42 @@
 </head>
 <body>
     <header>
+        <div>
+            Weather API APP
+        </div>
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>About</li>
+                <li>Services</li>
+            </ul>
+        </nav>
 
     </header>
     <nav>
 
     </nav>
     <main>
-        <div class ="mainContent">
-            <form action="",>
-                <input type="search" id="weather-search" name="q" placeholder="Enter Location...">
-                <button type="submit">Search</button>
-            </form>
-        </div>
-    </main>
-    <footer>
 
-    </footer>
+        <div class ="mainContent">
+            <form action="">
+                <input type="search" id="weather-search" name="q" placeholder="Enter Location...">
+
+                <button type="submit" id = "weather-search-btn">Search</button>
+                <label class="switch">
+                    <input id = "toggleTempView" type="checkbox"  checked>
+                    <span class="slider round"></span>
+                </label>
+                <p class = "tempDataClass" >˚F</p>
+            </form>
+            
+            <article class ="weatherBox">
+            </article>     
+        
+        </div>
+        <img class = "weather-gif">
+    </main>
+    <footer class ="footer"><a class= "footer-link" href="https://github.com/Shriyashzzz/weather-app" target="_blank"><img src= "./icons/github.svg" alt="github icon" class = "icons github"><p>Shriyashzzz</p></a></footer>
+
 </body>
 </html>

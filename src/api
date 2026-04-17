@@ -22,20 +22,54 @@ async function fetchWeather(location){
 
 export async function getWeatherData(location){
     let rawData = await fetchWeather(location);
-    let address =  rawData.address;
+    console.log(`this is the raw data`, rawData)
+    // console.log(`this is the rawData`, rawData)
+    let address =  capitalizeFirstLetter(rawData.address);
+    let resolvedAdress = rawData.resolvedAddress;
     let currentConditions =  rawData.currentConditions;
     let days =  rawData.days;
     let description =   rawData.description;
-    return  new  CleanData(address, currentConditions, days, description)
+    return  new  CleanData(address,resolvedAdress, currentConditions, days, description)
 }
 
 
 
 class CleanData{
-    constructor(address, currentConditions, days, description ){
-        this.location = address;
-        this.currentConditions = currentConditions;
+    constructor(address,resolvedAddress, currentConditions, days, description ){
+        this.address = address;
+        this.icon = currentConditions.icon;
+        this.resolvedAddress = resolvedAddress; 
+        this.condition = currentConditions.conditions;
+        this.feelsLike = currentConditions.feelslike;
+        this.temp = currentConditions.temp;
+        this.uvindex = currentConditions.uvindex;
         this.days = days;
+        this.icon = currentConditions.icon;
         this.description = description;
     }
+}
+
+
+
+
+
+export async function fetchWeatherGif(gifTitle){
+    const _apiKey = "LrBqmb8J544AiwmiAxpFAwcZaXRwcPIm";
+    try{
+        let response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${_apiKey}&q=${gifTitle}&limit=4&rating=g`);
+        if(response.ok){
+            let responseObj = await response.json();
+            return  responseObj.data
+        }else{
+            console.log(`Error from gif api:` ,response.status)
+        }
+
+    }catch(error){
+        console.log(`Network Error in fetching data:${error}`)
+    }
+}
+
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }

@@ -1,3 +1,4 @@
-import { fetchWeather, getWeatherData } from "./api"
+import "./style.css";
+import { instatnsiatePage } from "./userSearch"
 
-console.log(await getWeatherData("london"));
+instatnsiatePage();
