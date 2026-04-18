@@ -1,8 +1,10 @@
+import { myWeather } from "./database";
 import { getWeatherData } from "./api";
 import { main } from "./populateWeather.js";
 import { populateSearchGif, populateWeatherData } from "./populateWeather.js";
-import { myWeather } from "./database";
+import { showLoading, hideLoading } from "./loading.js";
 const toggleTempView = document.getElementById("toggleTempView")
+
 
 export async function instansiateHomePage(){
     let searchBox = document.getElementById('weather-search');
@@ -10,19 +12,35 @@ export async function instansiateHomePage(){
     instansiateToggleBtn();
     
     myWeather.length = 0;
-    myWeather.push(await getWeatherData("Kathmandu"))
+    showLoading()
+    try{
+         myWeather.push(await getWeatherData("Kathmandu"))
+    }catch(error){
+        console.log(`Error while fetching weather:`, error)
+    }finally{
+        hideLoading()
+    }
+   
     await populateWeatherData(myWeather[0],toggleTempView.checked )
     searchBtn.addEventListener('click', async (event)=>{
         event.preventDefault()
         if(searchBox.value != ""){
             myWeather.length= 0;
-            let weatherCleanData = await getWeatherData(searchBox.value)
-            myWeather.push(weatherCleanData)
-            searchBox.value = "";
-            let todayWeatherGif =  weatherCleanData.condition;
-            populateWeatherData(myWeather[0],toggleTempView.checked )
-            populateSearchGif(todayWeatherGif);
-            console.log(weatherCleanData)
+            
+            showLoading()
+            try{
+                let weatherCleanData = await getWeatherData(searchBox.value)
+                myWeather.push(weatherCleanData)
+                searchBox.value = "";
+                let todayWeatherGif =  weatherCleanData.condition;
+                populateWeatherData(myWeather[0],toggleTempView.checked )
+                populateSearchGif(todayWeatherGif);
+                console.log(weatherCleanData) 
+            }catch(error){
+                console.log(`Error while fetching weather:`, error)
+            }finally{
+                hideLoading()
+            }
             
             
         }else{

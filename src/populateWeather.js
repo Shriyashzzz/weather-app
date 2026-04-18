@@ -10,7 +10,7 @@ export const main = document.querySelector("main")
 
 
 export async function populateWeatherData(cleanWeatherData, isFarenheight = true){
-    weatherArticle.innerHTML = "";
+    weatherArticle.innerHTML = ""
     await populateWeatherHeader(cleanWeatherData, isFarenheight);
     setWeatherBoxBG(cleanWeatherData)
      

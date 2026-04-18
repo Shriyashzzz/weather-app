@@ -1,6 +1,6 @@
 
 
-
+import { getisLoading, setisLoading } from "./database";
 
 
 async function fetchWeather(location){
@@ -21,15 +21,28 @@ async function fetchWeather(location){
 }
 
 export async function getWeatherData(location){
-    let rawData = await fetchWeather(location);
-    console.log(`this is the raw data`, rawData)
-    // console.log(`this is the rawData`, rawData)
-    let address =  capitalizeFirstLetter(rawData.address);
-    let resolvedAdress = rawData.resolvedAddress;
-    let currentConditions =  rawData.currentConditions;
-    let days =  rawData.days;
-    let description =   rawData.description;
-    return  new  CleanData(address,resolvedAdress, currentConditions, days, description)
+    setisLoading(true);
+    
+    try {
+        let rawData = await fetchWeather(location);
+
+        console.log(`this is the raw data`, rawData);
+        
+        let address = capitalizeFirstLetter(rawData.address);
+        let resolvedAddress = rawData.resolvedAddress;
+        let currentConditions = rawData.currentConditions;
+        let days = rawData.days;
+        let description = rawData.description;
+        
+        return new CleanData(address, resolvedAddress, currentConditions, days, description);
+        
+    } catch(error) {
+        console.log(`Error while fetching weather:`, error);
+        throw error; 
+        
+    } finally {
+        setisLoading(false);
+    }
 }
 
 
