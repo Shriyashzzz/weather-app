@@ -8,6 +8,7 @@ export async function instansiateHomePage(){
     let searchBox = document.getElementById('weather-search');
     let searchBtn = document.getElementById('weather-search-btn');
     instansiateToggleBtn();
+    
     myWeather.length = 0;
     myWeather.push(await getWeatherData("Kathmandu"))
     await populateWeatherData(myWeather[0],toggleTempView.checked )
@@ -46,6 +47,7 @@ function instansiateToggleBtn(){
 
 
 export function showHome(){
+    
     main.style.display = "grid"
 }
 

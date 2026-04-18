@@ -113,6 +113,15 @@ header{
     ul{
         gap:2rem;
         display:flex;
+        li:hover{
+            border-bottom: 1px solid green;
+            color: beige;
+            cursor: pointer; 
+        }
+        li:active{
+            background-color: #ddd;
+            transform: translateY(1px);
+        }
     }
 }
 
@@ -363,11 +372,7 @@ input:checked + .slider:before {
     }
 
 
-li:hover{
-    border-bottom: 1px solid green;
-    color: beige;
-    cursor: pointer; 
-}
+
 
 
 
