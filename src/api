@@ -37,6 +37,7 @@ export async function getWeatherData(location){
 class CleanData{
     constructor(address,resolvedAddress, currentConditions, days, description ){
         this.address = address;
+        this.currentConditions = currentConditions
         this.icon = currentConditions.icon;
         this.resolvedAddress = resolvedAddress; 
         this.condition = currentConditions.conditions;

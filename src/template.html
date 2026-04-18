@@ -10,11 +10,10 @@
         <div>
             Weather API APP
         </div>
-        <nav>
+        <nav class="headerNav">
             <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Services</li>
+                <li id = "HomePage">Home</li>
+                <li id = "AboutPage">About</li>
             </ul>
         </nav>
 
@@ -26,7 +25,7 @@
 
         <div class ="mainContent">
             <form action="">
-                <input type="search" id="weather-search" name="q" placeholder="Enter Location...">
+                <input type="search" id="weather-search" name="q" placeholder="Enter Location..." min>
 
                 <button type="submit" id = "weather-search-btn">Search</button>
                 <label class="switch">

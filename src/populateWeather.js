@@ -1,12 +1,36 @@
 import { fetchWeatherGif } from "./api";
-import { getRelativeDate } from "./date.js";
+import { getRelativeDate, isItDayTime } from "./date.js";
 
 const weatherArticle = document.querySelector(".weatherBox")
+export const main = document.querySelector("main")
+
+
+
+
+
+
 export async function populateWeatherData(cleanWeatherData, isFarenheight = true){
-    weatherArticle.innerHTML = ""
-    await populateWeatherHeader(cleanWeatherData, isFarenheight)
+    await populateWeatherHeader(cleanWeatherData, isFarenheight);
+    setWeatherBoxBG(cleanWeatherData)
+     
 }
 
+
+
+function setWeatherBoxBG(cleanWeatherData){
+    const weatherBox = document.querySelector(".weatherBox")
+     if(!isItDayTime(cleanWeatherData.currentConditions.datetime)){
+        main.classList.add("mainNightBg")
+        weatherBox.classList.add("weatherNightBG");
+     }else if(isItDayTime(cleanWeatherData.currentConditions.datetime)){
+        console.log(isItDayTime(cleanWeatherData.currentConditions.datetime))
+        if (main.classList.contains('mainNightBg')) {
+            main.classList.remove("mainNightBg")
+            weatherBox.classList.remove("weatherNightBG")
+        }      
+     }
+    
+}
 
 
 async function populateWeatherCards(cleanWeatherData){
@@ -87,7 +111,6 @@ async function getWeathericon(givenIcon){
 
 export async function populateSearchGif(weatherDesc){
     const todayWeatherIcon = document.querySelector(".weather-gif")
-    console.log(weatherDesc);
     let rawGif = await fetchWeatherGif(`${weatherDesc} weather`);
 
     let  gifUrl = rawGif[0].images.downsized_medium.url;
@@ -97,9 +120,6 @@ export async function populateSearchGif(weatherDesc){
 
 
 
-function generateRadnomNumber(){
-    return Math.floor(Math.random()*3)+1
-}
 
 
 function createElement(elementType, className,elementContent){

@@ -1,12 +1,15 @@
 import { getWeatherData } from "./api";
-import { populateSearchGif, populateWeatherData } from "./populateWeather";
+import { main } from "./populateWeather.js";
+import { populateSearchGif, populateWeatherData } from "./populateWeather.js";
 import { myWeather } from "./database";
 const toggleTempView = document.getElementById("toggleTempView")
-
-export function instatnsiatePage(){
-    const searchBox = document.getElementById('weather-search');
-    const searchBtn = document.getElementById('weather-search-btn');
-    instatnsiateToggleBtn();
+export async function instansiateHomePage(){
+    let searchBox = document.getElementById('weather-search');
+    let searchBtn = document.getElementById('weather-search-btn');
+    instansiateToggleBtn();
+    myWeather.length = 0;
+    myWeather.push(await getWeatherData("Kathmandu"))
+    await populateWeatherData(myWeather[0],toggleTempView.checked )
     searchBtn.addEventListener('click', async (event)=>{
         event.preventDefault()
         if(searchBox.value != ""){
@@ -28,11 +31,10 @@ export function instatnsiatePage(){
     
 }
 
-function instatnsiateToggleBtn(){
+function instansiateToggleBtn(){
     toggleTempView.addEventListener('click', ()=>{
         if(myWeather.length!=0){
             populateWeatherData(myWeather[0], toggleTempView.checked)
-            console.log(toggleTempView.checked)
         }
 
 
@@ -40,6 +42,17 @@ function instatnsiateToggleBtn(){
     })
 
 }
+
+
+export function showHome(){
+    main.style.display = "grid"
+}
+
+
+export function hideHome(){
+    main.style.display = "none"
+}
+
 
             
 
