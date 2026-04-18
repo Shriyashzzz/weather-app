@@ -368,3 +368,35 @@ li:hover{
     color: beige;
     cursor: pointer; 
 }
+
+
+
+#aboutContent{
+    margin: 0;
+    padding: 4rem 2rem;
+    background: #c2cbed;
+    font-family: monospace;
+    font-size: 1rem;
+    color: #1a1a2e;
+    max-width: 540px;
+    display: none;
+
+
+    h1 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    p  { line-height: 1.8; color: #3a3a5a; margin-bottom: 1.5rem; }
+
+    ul {
+    padding-left: 1.2rem;
+    line-height: 2;
+    color: #3a3a5a;
+    margin-bottom: 1.5rem;
+    }
+
+    a { color: #5a5fcf; }
+
+    hr {
+    border: none;
+    border-top: 1px solid rgba(90,95,207,0.3);
+    margin: 2rem 0;
+    }
+}

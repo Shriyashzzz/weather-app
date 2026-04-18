@@ -3,6 +3,7 @@ import { main } from "./populateWeather.js";
 import { populateSearchGif, populateWeatherData } from "./populateWeather.js";
 import { myWeather } from "./database";
 const toggleTempView = document.getElementById("toggleTempView")
+
 export async function instansiateHomePage(){
     let searchBox = document.getElementById('weather-search');
     let searchBtn = document.getElementById('weather-search-btn');
