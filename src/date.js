@@ -17,7 +17,8 @@ export function getRelativeDate(inputDate) {
 }
 
 export function isItDayTime(dateTime){
-  if((dateTime.slice(0, 2))>=16){
+  let currentHour =(dateTime.slice(0, 2))
+  if((currentHour>=16) || ((currentHour)>=0 && (currentHour <=5))){
     return false;
   }
   return true

@@ -14,14 +14,15 @@ export async function instansiateHomePage(){
     myWeather.length = 0;
     showLoading()
     try{
-         myWeather.push(await getWeatherData("Kathmandu"))
+        myWeather.push(await getWeatherData("Kathmandu"))
+        await populateWeatherData(myWeather[0],toggleTempView.checked )
+
     }catch(error){
         console.log(`Error while fetching weather:`, error)
     }finally{
         hideLoading()
     }
    
-    await populateWeatherData(myWeather[0],toggleTempView.checked )
     searchBtn.addEventListener('click', async (event)=>{
         event.preventDefault()
         if(searchBox.value != ""){
