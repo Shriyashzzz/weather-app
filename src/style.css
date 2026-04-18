@@ -153,8 +153,8 @@ header{
     width: 100vw;
     margin:0px;
     text-decoration:wavy;
-    font-family: "Press Start 2P", sans-serif;
-    font-size: 0.7rem;
+    font-family: monospace;
+    font-size: 1rem;
     
     .footer-link{
         text-decoration: none;
